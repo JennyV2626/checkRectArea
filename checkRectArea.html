@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rectangle Area</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+    <div class="content">
+        <h3>Is this the correct area for a rectangle?</h3>
+        <div class="row">
+            <div>
+                <label for="a">Side A</label>
+                <input type="text" id="a" name="a" style="width: 100px;">
+            </div>
+            <div>
+                <label for="b">Side B</label>
+                <input type="text" id="b" name="b" style="width: 100px;">
+            </div>
+            <div>
+                <label for="c">Area?</label>
+                <input type="text" id="c" name="c" style="width: 100px;">
+            </div>
+        </div>
+        <button id="calc">Calculate</button>
+        <button id="clear">Clear</button>
+        <p></p>
+    </div>
+</div>
+<script>
+    const a = document.getElementById('a');
+    const b = document.getElementById('b');
+    const c = document.getElementById('c');
+    const ans = document.querySelector('p');
+    const calculateButton = document.getElementById('calc');
+    const clearButton = document.getElementById('clear');
+
+    function checkArea(num1, num2, num3){
+        let areaAnswer = num3;
+        let rectArea = num1 * num2;
+
+        if(areaAnswer == rectArea){
+            return true;
+        }
+        return false;
+    }
+
+    calculateButton.addEventListener('click', function(e){
+        let sideA = +a.value;
+        let sideB = +b.value;
+        let area = +c.value;
+
+        if(!checkIsValid(sideA) || !checkIsValid(sideB) || !checkIsValid(area)){
+            ans.textContent = 'Invalid Inputs';
+            return;
+        }
+
+        if(checkArea(sideA, sideB, area)){
+            ans.textContent = 'Yes, this is the area of the rectangle.'
+            return;
+        }
+        ans.textContent = 'Inputs do NOT match the inputted area.'
+    })
+
+    function checkIsValid(num){
+        if (isNaN(num)){
+            return false
+        }
+        if (num <= 0){
+            return false
+        }
+        return true
+    }
+
+    clearButton.addEventListener('click', function(e){
+        a.value = " ";
+        b.value = " ";
+        c.value = " ";
+        ans.textContent = "";
+    })
+</script>
+</body>
+</html>
